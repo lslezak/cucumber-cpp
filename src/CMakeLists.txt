@@ -36,6 +36,15 @@ endif()
 add_library(cucumber-cpp-nomain STATIC ${CUKE_SOURCES})
 add_library(cucumber-cpp STATIC ${CUKE_SOURCES} main.cpp)
 
+INSTALL(TARGETS cucumber-cpp-nomain cucumber-cpp
+    DESTINATION "lib64"
+    )
+
+INSTALL (DIRECTORY "${CMAKE_SOURCE_DIR}/include/cucumber-cpp"
+    DESTINATION "include"
+    FILES_MATCHING PATTERN "*.hpp"
+    )
+
 if(MINGW)
     target_link_libraries(cucumber-cpp-nomain
         ws2_32

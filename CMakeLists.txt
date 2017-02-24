@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(Cucumber-Cpp)
 
+SET(VERSION_MAJOR "0")
+SET(VERSION_MINOR "3")
+SET(VERSION_PATCH "1")
+SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${GIT_SHA1_VERSION}" )
+
 set(CUKE_USE_STATIC_BOOST ${WIN32} CACHE BOOL "Statically link Boost (except boost::test)")
 set(CUKE_USE_STATIC_GTEST ON CACHE BOOL "Statically link Google Test")
 
@@ -176,3 +181,8 @@ endif()
 if(CUKE_ENABLE_EXAMPLES)
     add_subdirectory(examples)
 endif()
+
+set(CPACK_SOURCE_GENERATOR "TBZ2")
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+set(CPACK_SOURCE_IGNORE_FILES "/build/;/.git/;~$;${CPACK_SOURCE_IGNORE_FILES}")
+include(CPack)
